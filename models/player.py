@@ -14,6 +14,7 @@ class Player:
         first_name: str,
         last_name: str,
         birthdate: str,
+        club: str = "",
     ):
         # Save national chess ID (e.g., AB12345)
         self.chess_id = chess_id
@@ -23,6 +24,8 @@ class Player:
         self.last_name = last_name
         # Save date of birth as string
         self.birthdate = birthdate
+        # Save club / team name
+        self.club = club
 
     # ==========================================
     # SECTION 2: HELPER PROPERTIES
@@ -44,16 +47,33 @@ class Player:
             "first_name": self.first_name,
             "last_name": self.last_name,
             "birthdate": self.birthdate,
+            "club": self.club,
         }
 
     @classmethod
     def from_dict(cls, data: dict) -> "Player":
         """Instantiates a Player object from a JSON-loaded dictionary."""
+        # Handle single 'name' key (e.g., "John Underwood") if first_name missing
+        if "name" in data and "first_name" not in data:
+            name_parts = data["name"].split(" ", 1)
+            first_name = name_parts[0]
+            last_name = name_parts[1] if len(name_parts) > 1 else ""
+        else:
+            first_name = data.get("first_name", "")
+            last_name = data.get("last_name", "")
+
+        # Handle 'birthday' vs 'birthdate' key variations
+        birthdate = data.get("birthdate") or data.get("birthday", "")
+
+        # Extract club name (default to empty string if missing)
+        club = data.get("club", "")
+
         return cls(
             chess_id=data["chess_id"],
-            first_name=data["first_name"],
-            last_name=data["last_name"],
-            birthdate=data["birthdate"],
+            first_name=first_name,
+            last_name=last_name,
+            birthdate=birthdate,
+            club=club,
         )
 
     # ==========================================
@@ -62,4 +82,5 @@ class Player:
     # ==========================================
     def __str__(self) -> str:
         """Human-readable string representation."""
-        return f"{self.full_name} ({self.chess_id})"
+        club_str = f" [{self.club}]" if self.club else ""
+        return f"{self.full_name} ({self.chess_id}){club_str}"
