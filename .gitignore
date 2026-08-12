@@ -1,0 +1,10 @@
+# Python environment & cache
+venv/
+ENV/
+__pycache__/
+*.pyc
+
+# Development & Linting outputs
+flake8_html/
+.vscode/
+.idea/
