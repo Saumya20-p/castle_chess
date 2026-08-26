@@ -29,15 +29,12 @@ A Python console application built following MVC (Model-View-Controller) princip
     ```bash
     pip install -r requirements.txt
 
----
 
 ## How to Run the Application
 
 Launch the main controller application from your terminal:
     ```bash
     python main.py
-
----
 
 ## Generating the Flake8 Quality Report
 
