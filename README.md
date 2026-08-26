@@ -21,27 +21,27 @@ A Python console application built following MVC (Model-View-Controller) princip
    cd castle_chess
 
 2.  Set Up Python Virtual Environment:
-   ```bash
+   Bash
     python3 -m venv venv
     source venv/bin/activate
 
 3. Install Dependencies:
-    ```bash
+    Bash
     pip install -r requirements.txt
 
 
 ## How to Run the Application
 
 Launch the main controller application from your terminal:
-    ```bash
+    Bash
     python main.py
 
 ## Generating the Flake8 Quality Report
 
 1. To audit code quality and generate the official HTML report:
-    ```bash
+    Bash
     flake8 --format=html --htmldir=flake8_report
 
 2. To view the generated report on macOS:
-    ```bash
+    Bash
     open flake8_report/index.html
